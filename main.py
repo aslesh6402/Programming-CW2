@@ -21,4 +21,14 @@ def scrape():
             content += "Paragraphs:\n" + '\n\n'.join([p.text for p in soup.find_all('p')]) + "\n\n"
         
         if link_var.get():
-            content += "Links
+            content += "Links:\n" + '\n'.join([a['href'] for a in soup.find_all('a', href=True)]) + "\n\n"
+        
+        if image_var.get():
+            content += "Images:\n" + '\n'.join([img['src'] for img in soup.find_all('img', src=True)]) + "\n\n"
+        
+        # Custom Tag/Element Extraction
+        custom_tag = custom_tag_entry.get()
+        if custom_tag:
+            elements = soup.find_all(custom_tag)
+            custom_content = '\n\n'.join([str(element) for element in elements])
+            content += f"Custom {custom_tag} Elements:\n" + custom_content + "\n\n"
