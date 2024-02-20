@@ -48,3 +48,13 @@ def save_data():
     
     file_name = filedialog.asksaveasfilename(defaultextension=f".{file_type}",
                                              filetypes=[(f"{file_type.upper()} files", f"*.{file_type}")])
+    
+    if not file_name:
+        return  # User cancelled save
+    
+    try:
+        if file_type == 'csv':
+            with open(file_name, 'w', newline='', encoding='utf-8') as file:
+                writer = csv.writer(file)
+                writer.writerow(['Content'])
+                writer.writerow([data])
