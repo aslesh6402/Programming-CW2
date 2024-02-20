@@ -58,3 +58,13 @@ def save_data():
                 writer = csv.writer(file)
                 writer.writerow(['Content'])
                 writer.writerow([data])
+
+        elif file_type == 'json':
+            with open(file_name, 'w', encoding='utf-8') as file:
+                json.dump({"content": data}, file, ensure_ascii=False, indent=4)
+        elif file_type == 'txt':
+            with open(file_name, 'w', encoding='utf-8') as file:
+                file.write(data)
+        messagebox.showinfo("Success", f"Data successfully saved as {file_name}!")
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to save file. Error: {e}")
