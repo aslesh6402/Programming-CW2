@@ -32,3 +32,17 @@ def scrape():
             elements = soup.find_all(custom_tag)
             custom_content = '\n\n'.join([str(element) for element in elements])
             content += f"Custom {custom_tag} Elements:\n" + custom_content + "\n\n"
+        
+        result_area.delete(1.0, tk.END)
+        result_area.insert(tk.INSERT, content)
+
+    except Exception as e:
+        messagebox.showerror("Error", "Failed to scrape the URL. Error: " + str(e))
+
+def save_data():
+    file_type = file_type_var.get()
+    data = result_area.get(1.0, tk.END)
+    if not data.strip():
+        messagebox.showwarning("Warning", "No data to save!")
+        return
+   
