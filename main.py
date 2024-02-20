@@ -45,4 +45,6 @@ def save_data():
     if not data.strip():
         messagebox.showwarning("Warning", "No data to save!")
         return
-   
+    
+    file_name = filedialog.asksaveasfilename(defaultextension=f".{file_type}",
+                                             filetypes=[(f"{file_type.upper()} files", f"*.{file_type}")])
