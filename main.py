@@ -68,3 +68,53 @@ def save_data():
         messagebox.showinfo("Success", f"Data successfully saved as {file_name}!")
     except Exception as e:
         messagebox.showerror("Error", f"Failed to save file. Error: {e}")
+
+# GUI setup
+root = tk.Tk()
+root.title("Advanced Web Scraper GUI")
+
+frame = Frame(root)
+frame.pack(padx=10, pady=10)
+
+url_label = Label(frame, text="URL:")
+url_label.pack(side=tk.LEFT)
+url_entry = Entry(frame, width=50)
+url_entry.pack(side=tk.LEFT)
+
+scrape_button = Button(frame, text="Scrape", command=scrape)
+scrape_button.pack(side=tk.LEFT, padx=5)
+
+options_frame = Frame(root)
+options_frame.pack(padx=10, pady=5)
+
+headline_var = IntVar()
+paragraph_var = IntVar()
+link_var = IntVar()
+image_var = IntVar()
+Checkbutton(options_frame, text="Headlines", variable=headline_var).pack(side=tk.LEFT)
+Checkbutton(options_frame, text="Paragraphs", variable=paragraph_var).pack(side=tk.LEFT)
+Checkbutton(options_frame, text="Links", variable=link_var).pack(side=tk.LEFT)
+Checkbutton(options_frame, text="Images", variable=image_var).pack(side=tk.LEFT)
+
+custom_tag_frame = Frame(root)
+custom_tag_frame.pack(padx=10, pady=5)
+custom_tag_label = Label(custom_tag_frame, text="Custom Tag:")
+custom_tag_label.pack(side=tk.LEFT)
+custom_tag_entry = Entry(custom_tag_frame, width=20)
+custom_tag_entry.pack(side=tk.LEFT)
+
+save_frame = Frame(root)
+save_frame.pack(padx=10, pady=5)
+
+file_type_var = tk.StringVar(value='txt')
+Button(save_frame, text="CSV", command=lambda: file_type_var.set('csv')).pack(side=tk.LEFT)
+Button(save_frame, text="JSON", command=lambda: file_type_var.set('json')).pack(side=tk.LEFT)
+Button(save_frame, text="TXT", command=lambda: file_type_var.set('txt')).pack(side=tk.LEFT)
+
+save_button = Button(save_frame, text="Save Data", command=save_data)
+save_button.pack(side=tk.RIGHT, padx=5)
+
+result_area = scrolledtext.ScrolledText(root, width=60, height=20)
+result_area.pack(padx=10, pady=5)
+
+root.mainloop()
